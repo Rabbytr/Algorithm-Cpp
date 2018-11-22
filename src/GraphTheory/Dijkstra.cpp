@@ -37,7 +37,7 @@ void addEdge(int fro,int to,int w){ //无向图
 }
 
 void Dijkstra(int s){
-  REP(i,1,n+1){d[i] = INF;p[i] = i;}
+  REP(i,1,n+1)d[i] = INF;
   Q.push((Node){0,s});
   d[s] = 0;
   while(!Q.empty()){
