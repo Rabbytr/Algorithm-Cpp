@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 
 #pragma GCC optimize("O3")
-#pragma GCC diagnostic error "-std=c++11"
+// #pragma GCC diagnostic error "-std=c++11"
 //#pragma comment(linker, "/STACK:102400000,102400000")
 #define REP(i, a, b) for(int i = a; i < b; ++i)
 #define debug(x) { cerr << #x << '=' << x << "\n"; }
@@ -9,11 +9,12 @@
 #define mset(a,b) memset(a,b,sizeof(a))
 #define mkpr make_pair
 #define ll long long
+#define print(x) cout<<x<<"\n"
 
 using namespace std;
 
-const int maxn = 100;
-const int INF = 1<<30;
+const int maxn = 1e5+6;
+const int INF = 0x3f3f3f3f;
 
 struct Node{
   int d,u;
@@ -21,11 +22,11 @@ struct Node{
     return rhs.d<d;
   }
 };
+
 struct Edge{int fro,to,w;};
 vector<Edge> edges;
 vector<int> G[maxn];
-priority_queue<Node> Q;
-int n,u,d[maxn],p[maxn];
+int n,d[maxn],p[maxn];
 bool vis[maxn];
 
 void addEdge(int fro,int to,int w){ //无向图
@@ -37,7 +38,8 @@ void addEdge(int fro,int to,int w){ //无向图
 }
 
 void Dijkstra(int s){
-  REP(i,1,n+1)d[i] = INF;
+  int u;
+  priority_queue<Node> Q;
   Q.push((Node){0,s});
   d[s] = 0;
   while(!Q.empty()){
@@ -54,6 +56,13 @@ void Dijkstra(int s){
       }
     }
   }
+}
+
+void init(){	// 多次调用时使用
+	mset(d,INF);
+	mset(vis,0);
+	edges.clear();
+	for(int i=0;i<maxn;i++)G[i].clear();
 }
 
 int main(){
